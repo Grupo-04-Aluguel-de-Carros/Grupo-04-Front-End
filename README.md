@@ -1,8 +1,9 @@
-# React + Vite
+# Projeto Integrador Grupo 04
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Github Frontend
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Definições:
+- - React Router DOM
+- - Fonte ( A definir )
+- - Pacote de ícones ( A definir )
+- - Paleta de cores ( A definir )
