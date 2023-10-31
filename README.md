@@ -4,6 +4,6 @@
 
 - Definições:
 - - React Router DOM
-- - Fonte ( A definir )
-- - Pacote de ícones ( A definir )
-- - Paleta de cores ( A definir )
+- - Fonte Roboto
+- - Pacote de ícones @phosphor
+- - Paleta de cores: Definido em layouts -> Theme
