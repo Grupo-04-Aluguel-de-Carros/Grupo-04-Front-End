@@ -19,6 +19,14 @@ export function Header() {
   // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useState();
 
+  const handleInitials = () => {
+    const partsName = user.nome.split(' ');
+    const letterFirstName = partsName[0];
+    const letterLastName = partsName[partsName.length - 1];
+    const nameInitials = letterFirstName.charAt(0) + letterLastName.charAt(0);
+    return nameInitials;
+  }
+
   const navigate = useNavigate();
 
   console.log(user);
@@ -34,7 +42,8 @@ export function Header() {
         <LoginArea>
           {user ? (
             <>
-              <FirstLetter>{user.nome.charAt(0).toUpperCase()}</FirstLetter>
+              <FirstLetter>{handleInitials(user).toUpperCase()}</FirstLetter>
+              {/* <FirstLetter>{user.nome.charAt(0).toUpperCase()}</FirstLetter> */}
               <WelcomeUser>Olá {user.nome}
               <LogoutUser onClick={() => toast.error("Você clicou para deslogar da plataforma")}>Sair</LogoutUser>
               </WelcomeUser>
