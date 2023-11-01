@@ -1,4 +1,3 @@
-
 export const defaultTheme = {
     'white': '#f7f2f2',
   
