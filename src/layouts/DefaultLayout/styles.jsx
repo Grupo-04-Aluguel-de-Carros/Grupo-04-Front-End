@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const LayoutContainer = styled.div`
     width: 100%;
-    min-height: calc(100vh - 175px);
+    min-height: calc(100vh - 165px);
 
 
     display: flex;

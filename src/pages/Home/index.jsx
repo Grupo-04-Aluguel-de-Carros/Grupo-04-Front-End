@@ -1,28 +1,17 @@
-import { useState } from "react";
-import {
-  FullWithPicker,
-  IconPin,
-  InputsArea,
-  InputSpace,
-  InputCidade,
-  InputDate,
-  Label,
-  DatePickerArea,
-  GroupCarArea,
-  GroupCarTitle,
-  GropCarSubTitle,
-  GroupCarGallery,
-  MoreGroupCar,
-} from "./styles";
+import { useRef, useState } from "react";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
 
-import { toast } from "react-toastify";
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
 
-import "react-datepicker/dist/react-datepicker.css";
-import ptBR from "date-fns/locale/pt-BR";
+import "./styles.css";
 
-import { GroupCard } from "../../components/GroupCard";
+// import required modules
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
-import DatePicker from "react-datepicker";
+import { CustomButton } from "../../components/Button";
 
 export const groupCars = [
   {
@@ -131,75 +120,23 @@ export const groupCars = [
 ];
 
 export function Home() {
-  const [startDate, setStartDate] = useState(new Date());
-
-  console.log(startDate);
-
   return (
     <>
-      <FullWithPicker>
-        <InputsArea>
-          <InputSpace>
-            <Label>Escolha o local da retirada do seu veículo</Label>
-            <div>
-              <InputCidade placeholder="Agência em que seu veículo será retirado" />
-              <IconPin />
-            </div>
-          </InputSpace>
-
-          <DatePickerArea>
-            <Label>Retirada</Label>
-            <DatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              locale={ptBR}
-              wrapperClassName="react-datepicker__year-text--holidays"
-              customInput={<InputDate />}
-              placeholderText="Dia retirada"
-              isClearable={true}
-              startDate={startDate}
-              showTimeSelect
-              timeFormat="p"
-              timeIntervals={30}
-              dateFormat="Pp"
-            />
-          </DatePickerArea>
-
-          <DatePickerArea>
-            <Label>Devolução</Label>
-            <DatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              locale={ptBR}
-              wrapperClassName="react-datepicker__year-text--holidays"
-              customInput={<InputDate />}
-              placeholderText="Dia devolução"
-              isClearable={true}
-              startDate={startDate}
-              showTimeSelect
-              timeFormat="p"
-              timeIntervals={15}
-              dateFormat="Pp"
-            />
-          </DatePickerArea>
-        </InputsArea>
-      </FullWithPicker>
-
-      <GroupCarArea>
-        <GroupCarTitle>Conheça nossa frota</GroupCarTitle>
-        <GropCarSubTitle>
-          Os melhores carros do mercado para você aproveitar
-        </GropCarSubTitle>
-
-        <GroupCarGallery>
-          <GroupCard data={groupCars[0]} />
-          <GroupCard data={groupCars[1]} />
-          <GroupCard data={groupCars[2]} />
-          <GroupCard data={groupCars[3]} />
-        </GroupCarGallery>
-
-        <MoreGroupCar onClick={() => toast("Redirecionar para página com todas as categorias")} $outline>Conhecer toda a frota</MoreGroupCar>
-      </GroupCarArea>
+      <Swiper
+        navigation={true}
+        modules={[Autoplay, Pagination, Navigation]}
+        className="mySwiper"
+        style={{ height: "500px" }}
+        loop={true}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+      >
+        <SwiperSlide>Slide 1</SwiperSlide>
+        <SwiperSlide>Slide 2</SwiperSlide>
+        <SwiperSlide>Slide 3</SwiperSlide>
+      </Swiper>
     </>
   );
 }
