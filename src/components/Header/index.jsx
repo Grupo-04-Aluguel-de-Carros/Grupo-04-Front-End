@@ -4,58 +4,141 @@ import {
   Container,
   LogoArea,
   Logo,
-  SubTitle,
   LoginArea,
-  LoginBtn,
+  BtnArea,
   FirstLetter,
   WelcomeUser,
   LogoutUser,
+  DropDownTrigger,
+  DropDownContent,
+  DropdownItem,
+  DropdownSeparator,
 } from "./styles.jsx";
-import { useNavigate } from "react-router-dom";
+import { CustomButton } from "../Button/index.jsx";
+import { useNavigate, useLocation } from "react-router-dom";
 
-import { toast } from 'react-toastify';
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+
+import {
+  HamburgerMenuIcon,
+  ChevronRightIcon,
+  PersonIcon,
+  PinRightIcon,
+} from "@radix-ui/react-icons";
+
+import { toast } from "react-toastify";
 
 export function Header() {
   // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useState();
 
+  const navigate = useNavigate();
+
+  const location = useLocation();
+
   const handleInitials = () => {
-    const partsName = user.nome.split(' ');
+    const partsName = user.nome.split(" ");
     const letterFirstName = partsName[0];
     const letterLastName = partsName[partsName.length - 1];
     const nameInitials = letterFirstName.charAt(0) + letterLastName.charAt(0);
     return nameInitials;
-  }
-
-  const navigate = useNavigate();
-
-  console.log(user);
+  };
 
   return (
     <FullWidh>
       <Container>
         <LogoArea onClick={() => navigate("/")}>
           <Logo />
-          <SubTitle>Os melhores carros, as melhores vantagens.</SubTitle>
         </LogoArea>
 
         <LoginArea>
+          <DropdownMenu.Root>
+            <DropDownTrigger asChild>
+              <button className="IconButton" aria-label="Customise options">
+                <HamburgerMenuIcon />
+              </button>
+            </DropDownTrigger>
+
+            <DropdownMenu.Portal>
+              <DropDownContent className="DropdownMenuContent" sideOffset={5}>
+                {user ? (
+                  <>
+                    <DropdownItem className="DropdownMenuItem">
+                      <PersonIcon />
+                      {user.nome}
+                    </DropdownItem>
+
+                    <DropdownSeparator />
+
+                    <DropdownItem
+                      onClick={() => toast.error("Você saiu da aplicação")}
+                    >
+                      <PinRightIcon />
+                      Sair
+                    </DropdownItem>
+                  </>
+                ) : (
+                  <>
+                    <DropdownItem
+                      className="DropdownMenuItem"
+                      onClick={() => navigate("/signin")}
+                    >
+                      <PersonIcon />
+                      Entrar
+                    </DropdownItem>
+
+                    <DropdownSeparator />
+
+                    <DropdownItem onClick={() => navigate("/signup")}>
+                      <ChevronRightIcon />
+                      Cadastrar
+                    </DropdownItem>
+                  </>
+                )}
+              </DropDownContent>
+            </DropdownMenu.Portal>
+          </DropdownMenu.Root>
+
           {user ? (
             <>
               <FirstLetter>{handleInitials(user).toUpperCase()}</FirstLetter>
-              {/* <FirstLetter>{user.nome.charAt(0).toUpperCase()}</FirstLetter> */}
-              <WelcomeUser>Olá {user.nome}
-              <LogoutUser onClick={() => toast.error("Você clicou para deslogar da plataforma")}>Sair</LogoutUser>
+              <WelcomeUser>
+                Olá {user.nome}
+                <LogoutUser
+                  onClick={() =>
+                    toast.error("Você clicou para deslogar da plataforma")
+                  }
+                >
+                  Sair
+                </LogoutUser>
               </WelcomeUser>
-              
             </>
           ) : (
-            <>
-              <LoginBtn $outline onClick={() => navigate("/signin")}>Entrar</LoginBtn>
-              <LoginBtn onClick={() => navigate("/signup")}>
-                Criar conta
-              </LoginBtn>
-            </>
+            <BtnArea>
+              {location.pathname === "/signin" ? (
+                <CustomButton
+                  name="Cadastrar"
+                  onClick={() => navigate("/signup")}
+                />
+              ) : location.pathname === "/signup" ? (
+                <CustomButton
+                  name="Entrar"
+                  onClick={() => navigate("/signin")}
+                />
+              ) : (
+                <BtnArea>
+                  <CustomButton
+                    name="Entrar"
+                    onClick={() => navigate("/signin")}
+                  />
+                  <CustomButton
+                    name="Cadastrar"
+                    $outline
+                    onClick={() => navigate("/signin")}
+                  />
+                </BtnArea>
+              )}
+            </BtnArea>
           )}
         </LoginArea>
       </Container>

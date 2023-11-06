@@ -1,6 +1,6 @@
 import { CardArea, CarImg, Title, SubTitle } from "./styles.jsx";
 
-export function GroupCard({ data }) {
+export function GroupCard({data}) {
   console.log(data);
 
   return (

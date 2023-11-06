@@ -1,21 +1,43 @@
-import { Container, TitlePage, Form, Label, Input, ErrorP, SubmitBtn, DontHaveAccount } from "./styles";
+import {
+  Container,
+  TitlePage,
+  Form,
+  Label,
+  InputDiv,
+  Input,
+  InputIconClose,
+  InputIconOpen,
+  ErrorP,
+  DontHaveAccount,
+} from "./styles";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { CustomButton } from "../../components/Button";
 
 const loginSchema = yup
   .object({
-    email: yup.string().email("É necessário um email válido").required("O campo de email não foi preenchido."),
-    password: yup.string().min(6, "A senha deve conter no mínimo 6 caracteres.").required("A senha não foi preenchida.")
+    email: yup
+      .string()
+      .email("É necessário um email válido")
+      .required("O campo de email não foi preenchido."),
+    password: yup
+      .string()
+      .min(6, "A senha deve conter no mínimo 6 caracteres.")
+      .required("A senha não foi preenchida."),
   })
-  .required()
+  .required();
 
 export function SignIn() {
-  
-    const {
+  const navigate = useNavigate();
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const {
     register,
     handleSubmit,
     formState: { errors },
@@ -23,8 +45,8 @@ export function SignIn() {
     resolver: yupResolver(loginSchema),
   });
 
-
-  const onSubmit = (data) => toast(`Email: ${data.email}\n Senha: ${data.password}`);
+  const onSubmit = (data) =>
+    toast(`Email: ${data.email}\n Senha: ${data.password}`);
 
   return (
     <Container>
@@ -32,19 +54,46 @@ export function SignIn() {
 
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Label>Email:</Label>
-        <Input {...register("email")} placeholder="****@seuemail.com.br"/>
+        <Input {...register("email")} placeholder="****@seuemail.com.br" />
         <ErrorP>{errors.email?.message}</ErrorP>
 
         <Label>Password:</Label>
-        <Input {...register("password")} type="password" placeholder="*****"/>
+        <InputDiv>
+          <Input
+            {...register("password")}
+            type={showPassword ? "text" : "password"}
+            placeholder="*****"
+          />
+          {showPassword ? (
+            <InputIconOpen
+              onClick={() => setShowPassword((prevCheck) => !prevCheck)}
+              showPassword
+            />
+          ) : (
+            <InputIconClose
+              onClick={() => setShowPassword((prevCheck) => !prevCheck)}
+              showPassword
+            />
+          )}
+        </InputDiv>
         <ErrorP>{errors.password?.message}</ErrorP>
 
-        <SubmitBtn $outline type="submit"> Entrar</SubmitBtn>
-
+        <CustomButton
+          name="Entrar"
+          type="submit"
+          style={{ padding: "10px", marginTop: "10px" }}
+        />
       </Form>
 
-      <DontHaveAccount>Não possuí uma conta? <Link to="/signup">Cadastre-se</Link></DontHaveAccount>
-
+      <DontHaveAccount>
+        Não possuí uma conta?{" "}
+        <CustomButton
+          onClick={() => navigate("/signup")}
+          name="Cadastre-se"
+          $outline
+          style={{ marginLeft: "10px" }}
+        />
+      </DontHaveAccount>
     </Container>
   );
 }

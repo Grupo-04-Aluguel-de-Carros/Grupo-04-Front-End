@@ -15,12 +15,12 @@ export const CardArea = styled.div`
 
     border: 1px solid ${(props) => props.theme["gray-300"]};
     border-radius: 20px;
+    background-color: ${(props) => props.theme["gray-600"]};
 `
 
 export const CarImg = styled.img`
   width: 250px;
   height: 120px;
-
   margin-bottom: 50px;
 `;
 

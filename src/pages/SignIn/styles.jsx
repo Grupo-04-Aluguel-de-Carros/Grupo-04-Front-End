@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import {
+    EyeClosedIcon, EyeOpenIcon
+  } from "@radix-ui/react-icons";
 
 export const Container = styled.main`
     width: 100%;
@@ -11,8 +14,12 @@ export const Container = styled.main`
 `
 
 export const TitlePage = styled.h1`
-    font-size: 2rem;
-    color: ${(props) => props.theme["primary-dark"]};
+    font-size: 2.5rem;
+    color: ${(props) => props.theme["gray100"]};
+
+    @media (max-width: 768px) {
+        font-size: 2.0rem;
+  }
 `
 
 export const Form = styled.form`
@@ -28,9 +35,13 @@ export const Form = styled.form`
 export const Label = styled.label`
     font-size: .9rem;
     font-weight: 800;
-    color: ${(props) => props.theme["primary-dark"]};
+    color: ${(props) => props.theme["gray100"]};
     margin-left: 10px;
 `
+
+export const InputDiv = styled.div`
+    position: relative;
+`;
 
 export const Input = styled.input`
     width: 100%;
@@ -38,50 +49,45 @@ export const Input = styled.input`
     text-align: left;
     padding: 16px;
     border: none;
-    border-bottom: 1px solid ${(props) => props.theme["primary-light"]};
+    border-bottom: 1px solid ${(props) => props.theme["gray300"]};
     background: transparent;
+    color: ${(props) => props.theme["gray100"]};
 
     &:focus{
      outline: none;
-     border-bottom: 2px solid ${(props) => props.theme["primary-dark"]};
+     border-bottom: 2px solid ${(props) => props.theme["purple1"]};
+    }
+
+    &::placeholder{
+       font-size: 0.8rem;
+       color: ${(props) => props.theme["gray100"]}
     }
 
 `
+
+export const InputIconOpen = styled(EyeOpenIcon)`
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    color: ${(props) => props.theme["gray100"]};
+    cursor: pointer;
+`;
+
+export const InputIconClose = styled(EyeClosedIcon)`
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    color: ${(props) => props.theme["gray100"]};
+    cursor: pointer;
+`;
 
 export const ErrorP = styled.p`
     font-size: 0.7rem;
-    color: ${(props) => props.theme["red-300"]};
+    color: ${(props) => props.theme["error-light"]};
 `;
-
-export const SubmitBtn = styled.button`
-    width: 80%;
-    height: 50px;
-
-    font-size: 1.2rem;
-    font-weight: 800;
-
-    margin: 0 auto;
-    margin-top: 20px;
-
-    color: ${(props) => props.theme["primary-dark"]};
-    background-color: ${(props) => props.$outline ? 'transparent' : ''};
-    border: 1px solid ${(props) => props.theme['primary-light']};;
-    border-radius: 4px;
-    transition: all .5s;
-
-    &:hover{
-        color: ${(props) => props.theme["white"]};
-        cursor: pointer;
-        background-color: ${(props) => props.$outline ? props.theme["primary-dark"] : ''};
-    }
-
-    &:focus{
-        outline: none;
-    }
-`
 
 export const DontHaveAccount = styled.p`
     text-align: center;
     margin-top: 25px;
-    color: ${(props) => props.theme["gray-600"]}
+    color: ${(props) => props.theme["gray300"]}
 `

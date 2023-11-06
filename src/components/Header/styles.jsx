@@ -1,16 +1,21 @@
 import styled from "styled-components";
-import logo from '../../assets/dh_rentcarLogo.png';
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+
+import logo from "../../assets/DDRental.png";
 
 export const FullWidh = styled.nav`
   width: 100%;
   padding: 10px;
-  background-color: ${(props) => props.theme["gray-100"]};
+  /* background-color: ${(props) => props.theme["bg1"]}; */
+  background: rgba(9,9,9, 0.1);
+
+  /* position: absolute; */
+
   display: flex;
   align-items: center;
   justify-content: center;
 
-  box-shadow: 0px -5px 15px ${(props) => props.theme['primary-light']};
-
+  box-shadow: 0px -5px 15px ${(props) => props.theme["primary-light"]};
 `;
 
 export const Container = styled.main`
@@ -21,30 +26,23 @@ export const Container = styled.main`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 768px) {
+    justify-content: space-around;
+  }
 `;
 
 export const LogoArea = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
-`
-
-export const SubTitle = styled.span`
-  width: 400px;
-  margin-left: 20px;
-
-  font-size: 1.0rem;
-  font-style: italic;
-  font-weight: 100;
-  
-  color: ${(props) => props.theme['primary-light']};
-`
+`;
 
 export const Logo = styled.img.attrs({
-    src: `${logo}`
+  src: `${logo}`,
 })`
-width: 80px;
-height: 80px;
+  width: 150px;
+  height: 43px;
 `;
 
 export const LoginArea = styled.div`
@@ -52,53 +50,102 @@ export const LoginArea = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 5px;
   gap: 10px;
-`
+`;
+
+export const BtnArea = styled.div`
+  display: flex;
+  gap: 10px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+export const DropDownTrigger = styled(DropdownMenu.Trigger)`
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid ${(props) => props.theme["purple1"]};
+  outline: none;
+
+  color: ${(props) => props.theme["purple5"]};
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+`;
+
+export const DropDownContent = styled(DropdownMenu.Content)`
+  padding: 8px 16px;
+  color: ${(props) => props.theme["purple5"]};
+
+  outline: none;
+  background: ${(props) => props.theme["gray100"]};
+
+  border-radius: 4px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+`;
+
+export const DropdownItem = styled(DropdownMenu.Item)`
+  outline: none;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const DropdownSeparator = styled(DropdownMenu.Separator)`
+  height: 1px;
+  background-color: red;
+  margin: 5px;
+`;
 
 export const FirstLetter = styled.p`
   font-size: 1.3rem;
-  width: 50px;
-  height: 50px;
-  
+  width: 40px;
+  height: 40px;
+  padding: 22px;
+
   display: flex;
   justify-content: center;
   align-items: center;
 
   border-radius: 50%;
-  
-  background-color: ${(props) => props.theme["primary-dark"]};
 
-`
+  background-color: ${(props) => props.theme["purple1"]};
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
 
 export const WelcomeUser = styled.p`
-  font-size: 1.2rem;
-  color: ${(props) => props.theme["primary-dark"]};
+  color: ${(props) => props.theme["gray100"]};
   display: flex;
   flex-direction: column;
   justify-content: center;
-`
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
 
 export const LogoutUser = styled.a`
   text-decoration: none;
-  margin-top: 5px;
+  margin-top: 2px;
   cursor: pointer;
-  font-size: .8rem;
-`
+  font-size: 0.8rem;
 
-export const LoginBtn = styled.button`
-  padding: 8px 36px;
-  border-radius: 5px;
-  border: ${props => props.$outline ? `1px solid ${props.theme['primary-dark']}` : props.theme['primary-dark']};
-  background-color: ${props => props.$outline ? 'transparent' : props.theme['primary-dark']};
-  transition: all .5s;
-
-  color: ${(props) => props.$outline ? props.theme['primary-dark'] : props.theme['white']};
-  font-weight: 800;
-
-  &:hover{
-    background-color: ${(props) => props.$outline ? props.theme['gray-200'] : props.theme['primary-light']};
-    border: ${props => props.$outline ? `1px solid ${props.theme['primary-light']}` : props.theme['primary-dark']};
-    cursor: pointer;
+  @media (max-width: 768px) {
+    display: none;
   }
-`
+`;
