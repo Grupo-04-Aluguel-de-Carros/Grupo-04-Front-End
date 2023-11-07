@@ -20,7 +20,4 @@ export const defaultTheme = {
   'error-light': '#F75A68',
   'error-dark': '#7A1921',
 
-  'primary-dark' : '#AB222E',
-  'primary-light' : '#af16d6',  
-
   };
