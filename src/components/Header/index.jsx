@@ -116,15 +116,30 @@ export function Header() {
           ) : (
             <BtnArea>
               {location.pathname === "/signin" ? (
+                <>
                 <CustomButton
                   name="Cadastrar"
                   onClick={() => navigate("/signup")}
                 />
+
+                <CustomButton
+                name="Clique aqui pra acessar a rota"
+                onClick={() => navigate("/produto/123123")}
+              />
+              </>
               ) : location.pathname === "/signup" ? (
+                <>
                 <CustomButton
                   name="Entrar"
                   onClick={() => navigate("/signin")}
                 />
+
+
+                <CustomButton
+                name="Clique aqui pra acessar a rota"
+                onClick={() => navigate("/produto/123123")}
+              />
+              </>
               ) : (
                 <BtnArea>
                   <CustomButton
@@ -136,6 +151,11 @@ export function Header() {
                     $outline
                     onClick={() => navigate("/signin")}
                   />
+
+<CustomButton
+                name="Clique aqui pra acessar a rota"
+                onClick={() => navigate("/produto/123123")}
+              />
                 </BtnArea>
               )}
             </BtnArea>

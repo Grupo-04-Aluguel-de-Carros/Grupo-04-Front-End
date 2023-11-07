@@ -82,9 +82,10 @@ export function SignIn() {
           name="Entrar"
           type="submit"
           style={{ padding: "10px", marginTop: "10px" }}
+          $outline
         />
       </Form>
-
+              
       <DontHaveAccount>
         Não possuí uma conta?{" "}
         <CustomButton
