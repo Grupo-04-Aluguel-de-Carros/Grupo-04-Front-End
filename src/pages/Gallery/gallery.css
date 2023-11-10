@@ -1,0 +1,33 @@
+.image-gallery-container {
+    display: flex;
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .main-image {
+    flex: 1;
+    padding-right: 10px;
+  }
+  
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  .grid-container img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .view-more {
+    align-self: flex-end;
+    margin-top: auto;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #4285f4;
+    color: #fff;
+    cursor: pointer;
+  }
+  
