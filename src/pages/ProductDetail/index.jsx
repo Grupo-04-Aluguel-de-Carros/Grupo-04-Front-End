@@ -195,7 +195,7 @@ export function ProductDetail() {
             </DivPolicyUnit>
 
             <DivPolicyUnit>
-              <DivPolicyTitle>Políticas de cancelamento</DivPolicyTitle>
+              <DivPolicyTitle>Políticas</DivPolicyTitle>
 
               <DivPolicyUnit>
                 <SubTitle>
