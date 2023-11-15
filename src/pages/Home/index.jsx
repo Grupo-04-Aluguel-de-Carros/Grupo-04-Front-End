@@ -11,7 +11,9 @@ import "./styles.css";
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
+import { SliderCard } from "../../components/SliderCard";
 
+import { AreaDate, AreaDateLimit, LabelDate, SelectDate } from "./styles";
 
 export const groupCars = [
   {
@@ -133,10 +135,33 @@ export function Home() {
           disableOnInteraction: false,
         }}
       >
-        <SwiperSlide>Slide 1</SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
+        <SwiperSlide>
+          <SliderCard />
+        </SwiperSlide>
       </Swiper>
+
+      <AreaDate>
+        <AreaDateLimit>
+          <LabelDate>Testeaaa</LabelDate>
+          <SelectDate></SelectDate>
+        </AreaDateLimit>
+
+        <AreaDateLimit>
+          <LabelDate>Testeaaa</LabelDate>
+          <SelectDate>
+            <option>teste</option>
+            <option>teste</option>
+            <option>teste</option>
+            <option>teste</option>
+            <option>teste</option>
+          </SelectDate>
+        </AreaDateLimit>
+
+        <AreaDateLimit>
+          <LabelDate>Testeaaa</LabelDate>
+          <SelectDate></SelectDate>
+        </AreaDateLimit>
+      </AreaDate>
     </>
   );
 }
