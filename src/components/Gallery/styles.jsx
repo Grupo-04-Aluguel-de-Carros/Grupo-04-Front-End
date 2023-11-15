@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { XCircle } from "phosphor-react";
+import { XCircle, Heart, ShareNetwork as Share } from "phosphor-react";
 
 export const Container = styled.section`
   width: 100%;
@@ -70,6 +70,7 @@ export const Modal = styled.div`
   position: absolute;
   top: 0;
 
+  z-index: 99;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -78,17 +79,17 @@ export const Modal = styled.div`
 
 export const ModalContent = styled.div`
   max-width: 750px;
-  height: 60%;
+  height: 500px;
 `;
 
 export const CloseModal = styled(XCircle).attrs({
   size: 35,
   color: "#1a1919df",
 })`
-  position: absolute;
-  top: 160px;
-  right: 350px;
-  z-index: 99;
+  position: relative;
+  top: -500px;
+  right: -355px;
+  z-index: 100;
 
   transition: all 0.5s;
 
@@ -103,5 +104,38 @@ export const DivGalleryMobile = styled.section`
 
     @media (max-width: 768px) {
         display: contents;
+  }
+`;
+
+export const DivLikeAndShare = styled.div`
+  width: 100%;
+  padding: 0 25px;
+
+  display: flex;
+  justify-content: start;
+  gap: 20px;
+`;
+
+export const LikeIcon = styled(Heart).attrs((props) => ({
+  size: 30,
+  weight: props.$like ? "fill" : "bold", 
+}))`
+  cursor: pointer;
+  color: ${(props) => props.$like ? props.theme["error-light"] : props.theme["gray300"]};
+
+  &:hover{
+    color: ${(props) => props.theme["error-light"]};
+  }
+`;
+
+export const ShareIcon = styled(Share).attrs({
+  size: 30,
+})`
+  cursor: pointer;
+  color: ${(props) => props.theme["gray300"]};
+  transition: all .5s;
+  
+  &:hover{
+    color: ${(props) => props.theme["purple1"]};
   }
 `;

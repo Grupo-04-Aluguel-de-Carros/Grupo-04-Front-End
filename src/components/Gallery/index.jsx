@@ -11,6 +11,9 @@ import {
   ModalContent,
   CloseModal,
   DivGalleryMobile,
+  DivLikeAndShare,
+  LikeIcon,
+  ShareIcon
 } from "./styles";
 
 import "swiper/css";
@@ -31,9 +34,14 @@ import {
 export function Gallery() {
   const [openModal, setOpenModal] = useState(false);
   const [thumbsSwiper, setThumbsSwiper] = useState(" ");
+  const [likeStatus, setLikeStatus] = useState(true);
 
   const toggleModal = () => {
     setOpenModal(!openModal);
+  };
+
+  const toggleLike = () => {
+    setLikeStatus(!likeStatus);
   };
 
   return (
@@ -71,6 +79,7 @@ export function Gallery() {
           <MorePhotos onClick={toggleModal}>Ver mais</MorePhotos>
         </DivGallery>
       </Container>
+
       <DivGalleryMobile>
         <Container>
           <Swiper
@@ -103,6 +112,15 @@ export function Gallery() {
           </Swiper>
         </Container>
       </DivGalleryMobile>
+
+      <Container>
+        <DivLikeAndShare>
+          <LikeIcon $like={likeStatus} onClick={toggleLike} />
+          <ShareIcon />
+        </DivLikeAndShare>
+      </Container>
+
+      {/* == MODAL GALERIA DE IMAGENS == */}
 
       {!openModal ? (
         <></>

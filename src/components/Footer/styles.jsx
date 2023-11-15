@@ -4,10 +4,12 @@ import logo from "../../assets/logo1.png";
 export const FullWidh = styled.nav`
   width: 100%;
   padding: 10px;
+  margin-top: 24px;
   background-color: ${(props) => props.theme["bg"]};
   display: flex;
   align-items: center;
   justify-content: center;
+  
 
 `;
 
