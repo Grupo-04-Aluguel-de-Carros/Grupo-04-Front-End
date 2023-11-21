@@ -1,6 +1,9 @@
-// import { useRef, useState } from "react";
+import { useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import ptBR from "date-fns/locale/pt-BR";
 
 // Import Swiper styles
 import "swiper/css";
@@ -13,115 +16,49 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 import { SliderCard } from "../../components/SliderCard";
 
-import { AreaDate, AreaDateLimit, LabelDate, SelectDate } from "./styles";
+import {
+  AreaDate,
+  AreaDateLimit,
+  Container,
+  LabelDate,
+  SelectDate,
+  OptionDate,
+} from "./styles";
 
-export const groupCars = [
-  {
-    title: "GRUPO B - COMPACTO COM AR",
-    image: `https://www.localiza.com/brasil-site/geral/Frota/MOBI.png`,
-    descriptionSimilar:
-      "Veiculo similar a: Fiat mov, Renault Kwid 1.0, dentre outros",
-    advantages: [
-      "4 portas",
-      "Ar-Condicionado",
-      "Vidro Eltétrico",
-      "Trava Eltétrica",
-    ],
-  },
-
-  {
-    title: "GRUPO BE - COMPACTO ELÉTRICO",
-    image: `https://www.localiza.com/brasil-site/geral/Frota/ZOEE.png`,
-    descriptionSimilar:
-      "Veiculo similar a: Fiat mov, Renault Kwid 1.0, dentre outros",
-    description: [
-      "4 portas",
-      "Ar-Condicionado",
-      "Vidro Eltétrico",
-      "Trava Eltétrica",
-    ],
-  },
-
-  {
-    title: "GRUPO C - ECONÔMICO COM AR",
-    image: `https://www.localiza.com/brasil-site/geral/Frota/SANX.png`,
-    descriptionSimilar:
-      "Veiculo similar a: Fiat mov, Renault Kwid 1.0, dentre outros",
-    description: [
-      "4 portas",
-      "Ar-Condicionado",
-      "Vidro Eltétrico",
-      "Trava Eltétrica",
-    ],
-  },
-
-  {
-    title: "GRUPO CE - ECONÔMICO ESPECIAL C/AR",
-    image: `https://www.localiza.com/brasil-site/geral/Frota/HB2X.png`,
-    descriptionSimilar:
-      "Veiculo similar a: Fiat mov, Renault Kwid 1.0, dentre outros",
-    description: [
-      "4 portas",
-      "Ar-Condicionado",
-      "Vidro Eltétrico",
-      "Trava Eltétrica",
-    ],
-  },
-
-  {
-    title: "GRUPO CS - ECONÔMICO SEDAN C/AR",
-    image: `https://www.localiza.com/brasil-site/geral/Frota/HB2C.png`,
-    descriptionSimilar:
-      "Veiculo similar a: Fiat mov, Renault Kwid 1.0, dentre outros",
-    description: [
-      "4 portas",
-      "Ar-Condicionado",
-      "Vidro Eltétrico",
-      "Trava Eltétrica",
-    ],
-  },
-
-  {
-    title: "GRUPO F - INTERMEDIÁRIO",
-    image: `https://www.localiza.com/brasil-site/geral/Frota/HB20.png`,
-    descriptionSimilar:
-      "Veiculo similar a: Fiat mov, Renault Kwid 1.0, dentre outros",
-    description: [
-      "4 portas",
-      "Ar-Condicionado",
-      "Vidro Eltétrico",
-      "Trava Eltétrica",
-    ],
-  },
-
-  {
-    title: "GRUPO FS - INTERMEDIÁRIO SEDAN",
-    image: `https://www.localiza.com/brasil-site/geral/Frota/CROX.png`,
-    descriptionSimilar:
-      "Veiculo similar a: Fiat mov, Renault Kwid 1.0, dentre outros",
-    description: [
-      "4 portas",
-      "Ar-Condicionado",
-      "Vidro Eltétrico",
-      "Trava Eltétrica",
-    ],
-  },
-
-  {
-    title: "GRUPO  FH - INTERMEDIÁRIO HATCH AUTOMÁTICO",
-    image: `https://www.localiza.com/brasil-site/geral/Frota/YARS.png`,
-    descriptionSimilar:
-      "Veiculo similar a: Fiat mov, Renault Kwid 1.0, dentre outros",
-    description: [
-      "4 portas",
-      "Ar-Condicionado",
-      "Vidro Eltétrico",
-      "Trava Eltétrica",
-    ],
-  },
-];
+import { CustomButton } from "../../components/Button";
+import { Agencys } from "../../components/Agencys";
 
 export function Home() {
+  const selectOptions = [
+    { value: "", text: "-- Agência --" },
+    { value: "gramado", text: "Gramado - RS" },
+    { value: "riodejaneiro", text: "Rio de Janeiro - RJ" },
+    { value: "saopaulo", text: "São Paulo - SP" },
+  ];
+
+  function handleChange(event) {
+    setSelected(event.target.value);
+  }
+
+  function handleForms(e) {
+    e.preventDefault();
+
+    if (selected === "") {
+      alert("Escolha uma agência");
+      return;
+    }
+
+    const formsData = {
+      agency: selected,
+      StartDateSelect: startDate,
+    };
+
+    console.log(formsData);
+  }
+
+  const [selected, setSelected] = useState(selectOptions[0].value);
+  const [startDate, setStartDate] = useState(new Date());
+
   return (
     <>
       <Swiper
@@ -138,30 +75,44 @@ export function Home() {
         <SwiperSlide>
           <SliderCard />
         </SwiperSlide>
+
+        <SwiperSlide>
+          <SliderCard />
+        </SwiperSlide>
       </Swiper>
 
-      <AreaDate>
-        <AreaDateLimit>
-          <LabelDate>Testeaaa</LabelDate>
-          <SelectDate></SelectDate>
-        </AreaDateLimit>
+      <Container>
+        <AreaDate onSubmit={handleForms}>
+          <AreaDateLimit>
+            <LabelDate>
+              Escolha qual agência deseja retirar seu veiculo
+            </LabelDate>
 
-        <AreaDateLimit>
-          <LabelDate>Testeaaa</LabelDate>
-          <SelectDate>
-            <option>teste</option>
-            <option>teste</option>
-            <option>teste</option>
-            <option>teste</option>
-            <option>teste</option>
-          </SelectDate>
-        </AreaDateLimit>
+            <SelectDate value={selected} onChange={handleChange}>
+              {selectOptions.map((option) => (
+                <OptionDate key={option.value} value={option.value}>
+                  {option.text}
+                </OptionDate>
+              ))}
+            </SelectDate>
+          </AreaDateLimit>
 
-        <AreaDateLimit>
-          <LabelDate>Testeaaa</LabelDate>
-          <SelectDate></SelectDate>
-        </AreaDateLimit>
-      </AreaDate>
+          <AreaDateLimit>
+            <LabelDate>Escolha o dia da reserva</LabelDate>
+            <DatePicker
+              locale={ptBR}
+              showIcon
+              selected={startDate}
+              minDate={new Date()}
+              onChange={(date) => setStartDate(date)}
+            />
+          </AreaDateLimit>
+
+          <CustomButton name="consultar" type="submit" />
+        </AreaDate>
+      </Container>
+
+        <Agencys />
     </>
   );
 }

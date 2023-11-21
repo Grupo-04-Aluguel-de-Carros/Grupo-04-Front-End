@@ -1,58 +1,64 @@
 import styled from "styled-components";
 
-import imgbkg from "../../assets/imgBk.jpeg";
-
-export const FullWithPicker = styled.div`
+export const Container = styled.div`
   width: 100%;
-  /* height: 400px; */
-  background: url(${imgbkg}) no-repeat;
-  background-size: cover;
-  background-position: center;
+  max-width: 1120px;
+  padding: 4px;
+  margin: 0 auto;
+  z-index: 99;
+
+  @media (max-width: 768px) {
+    gap: 10px;
+    padding: 20px;
+  }
 `;
 
-export const Container = styled.main`
-  height: calc(100vh - 120px);
-`;
-
-
-export const AreaDate = styled.div`
-  height: 110px;
-  padding: 16px;
+export const AreaDate = styled.form`
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 100px;
 
   border-radius: 12px;
 
   background: linear-gradient(to right top, #fafafa, #fafafa);
+
+  display: flex;
+  align-items: center;
+
+  margin-bottom: -60px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    border-radius: 6px;
+    padding: 0px;
+    flex-direction: column;
+  }
+`;
+
+export const AreaDateLimit = styled.div`
+  width: 100%;
+
   margin: 0 auto;
+  padding: 20px;
 
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 18px;
-
-  margin-top: -50px;
-  z-index: 1;
-`; 
-
-export const AreaDateLimit = styled.div`
-  width: 90%;
-  margin: 0 auto;
-  background-color: red;
-
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-
+  gap: 8px;
 `;
 
 export const LabelDate = styled.label`
-  font-size: 1.2rem;
-  color: blue;
+  font-size: 0.6rem;
+  font-weight: bold;
+  color: ${(props) => props.theme["gray800"]};
 `;
 
 export const SelectDate = styled.select`
-  width: 450px;
-  height: 20px;
+  width: 100%;
+  padding: 6px;
+`;
 
-  border: none;
-  background-color: blue;
+export const OptionDate = styled.option`
+  font-size: 200px;
 `;
