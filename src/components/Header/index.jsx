@@ -30,7 +30,7 @@ import { toast } from "react-toastify";
 
 export function Header() {
   // eslint-disable-next-line no-unused-vars
-  const [user, setUser] = useState();
+  const [user, setUser] = useState({nome: "Mauricio Corrêa Alves"});
 
   const navigate = useNavigate();
 
