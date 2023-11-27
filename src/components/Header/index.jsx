@@ -149,7 +149,7 @@ export function Header() {
                   <CustomButton
                     name="Cadastrar"
                     $outline
-                    onClick={() => navigate("/signin")}
+                    onClick={() => navigate("/signup")}
                   />
 
 <CustomButton
