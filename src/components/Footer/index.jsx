@@ -19,7 +19,7 @@ export function Footer() {
   return (
     <FullWidh>
       <Container>
-        <Copy>&copy; Direitos reservados dhrentcar.com.br</Copy>
+        <Copy>&copy;2023 Direitos reservados dhrentcar.com.br</Copy>
         <SocialMediaArea>
           <SocialMediaBtn onClick={() => toast("Facebook")}>
             <FacebookLogo size={35} />
