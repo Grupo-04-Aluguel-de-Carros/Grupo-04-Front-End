@@ -7,3 +7,7 @@
 - - Fonte Roboto
 - - Pacote de ícones @phosphor
 - - Paleta de cores: Definido em layouts -> Theme
+
+# Link para relatório de testes manuais:
+
+https://docs.google.com/spreadsheets/d/1IYBWCnd0-abIU4Smy9Pzg29K8ilbnLVNGNZbpKIO6RU/edit#gid=0
