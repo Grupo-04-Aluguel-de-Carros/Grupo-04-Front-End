@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAuth } from "../../hooks/useAuth.jsx";
+
 import {
   FullWidh,
   Container,
@@ -30,14 +32,30 @@ import { toast } from "react-toastify";
 
 export function Header() {
   // eslint-disable-next-line no-unused-vars
-  const [user, setUser] = useState({nome: "Mauricio Corrêa Alves"});
+  const [user, setUser] = useState();
 
   const navigate = useNavigate();
+  const { signOut } = useAuth();
 
   const location = useLocation();
 
+  useEffect(() => {
+    async function loadUserData() {
+      const userData = localStorage.getItem("@rentCarUser");
+      const userResponse = JSON.parse(userData);
+      setUser(userResponse);
+    }
+
+    loadUserData();
+  }, []);
+
+  function handleSignOut() {
+    signOut();
+  }
+
   const handleInitials = () => {
-    const partsName = user.nome.split(" ");
+    const fullName = user.name + " " + user.surname;
+    const partsName = fullName.split(" ");
     const letterFirstName = partsName[0];
     const letterLastName = partsName[partsName.length - 1];
     const nameInitials = letterFirstName.charAt(0) + letterLastName.charAt(0);
@@ -65,13 +83,16 @@ export function Header() {
                   <>
                     <DropdownItem className="DropdownMenuItem">
                       <PersonIcon />
-                      {user.nome}
+                      {user.name}
                     </DropdownItem>
 
                     <DropdownSeparator />
 
                     <DropdownItem
-                      onClick={() => toast.error("Você saiu da aplicação")}
+                      onClick={() => {
+                        toast.error("Você saiu da aplicação");
+                        handleSignOut();
+                      }}
                     >
                       <PinRightIcon />
                       Sair
@@ -103,43 +124,36 @@ export function Header() {
             <>
               <FirstLetter>{handleInitials(user).toUpperCase()}</FirstLetter>
               <WelcomeUser>
-                Olá {user.nome}
-                <LogoutUser
-                  onClick={() =>
-                    toast.error("Você clicou para deslogar da plataforma")
-                  }
-                >
-                  Sair
-                </LogoutUser>
+                Olá {user.name}
+                <LogoutUser onClick={() => handleSignOut()}>Sair</LogoutUser>
               </WelcomeUser>
             </>
           ) : (
             <BtnArea>
               {location.pathname === "/signin" ? (
                 <>
-                <CustomButton
-                  name="Cadastrar"
-                  onClick={() => navigate("/signup")}
-                />
+                  <CustomButton
+                    name="Cadastrar"
+                    onClick={() => navigate("/signup")}
+                  />
 
-                <CustomButton
-                name="Clique aqui pra acessar a rota"
-                onClick={() => navigate("/produto/123123")}
-              />
-              </>
+                  <CustomButton
+                    name="Clique aqui pra acessar a rota"
+                    onClick={() => navigate("/produto/123123")}
+                  />
+                </>
               ) : location.pathname === "/signup" ? (
                 <>
-                <CustomButton
-                  name="Entrar"
-                  onClick={() => navigate("/signin")}
-                />
+                  <CustomButton
+                    name="Entrar"
+                    onClick={() => navigate("/signin")}
+                  />
 
-
-                <CustomButton
-                name="Clique aqui pra acessar a rota"
-                onClick={() => navigate("/produto/123123")}
-              />
-              </>
+                  <CustomButton
+                    name="Clique aqui pra acessar a rota"
+                    onClick={() => navigate("/produto/123123")}
+                  />
+                </>
               ) : (
                 <BtnArea>
                   <CustomButton
@@ -149,13 +163,13 @@ export function Header() {
                   <CustomButton
                     name="Cadastrar"
                     $outline
-                    onClick={() => navigate("/signin")}
+                    onClick={() => navigate("/signup")}
                   />
 
-<CustomButton
-                name="Clique aqui pra acessar a rota"
-                onClick={() => navigate("/produto/123123")}
-              />
+                  <CustomButton
+                    name="Clique aqui pra acessar a rota"
+                    onClick={() => navigate("/produto/123123")}
+                  />
                 </BtnArea>
               )}
             </BtnArea>

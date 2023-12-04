@@ -27,6 +27,9 @@ import {
 
 import { CustomButton } from "../../components/Button";
 import { Agencys } from "../../components/Agencys";
+import { Header } from "../../components/Header";
+import { Gallery } from "../../components/Gallery";
+import { Footer } from "../../components/Footer";
 
 export function Home() {
   const selectOptions = [
@@ -79,6 +82,10 @@ export function Home() {
         <SwiperSlide>
           <SliderCard />
         </SwiperSlide>
+
+        <SwiperSlide>
+          <SliderCard />
+        </SwiperSlide>
       </Swiper>
 
       <Container>
@@ -112,7 +119,9 @@ export function Home() {
         </AreaDate>
       </Container>
 
+      <Container style={{zIndex: 1}}>
         <Agencys />
+      </Container>
     </>
   );
 }

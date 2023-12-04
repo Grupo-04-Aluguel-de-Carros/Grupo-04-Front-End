@@ -33,7 +33,7 @@ import {
 } from "./styles";
 
 import { Gallery } from "../../components/Gallery";
-import {CustomButton} from "../../components/Button";
+import { CustomButton } from "../../components/Button";
 
 export function ProductDetail() {
   useEffect(() => {
@@ -67,7 +67,7 @@ export function ProductDetail() {
             <SubTitleHeader>Gramado / RS</SubTitleHeader>
             <TitleHeader>Porshe 911 - BiTurbo</TitleHeader>
           </DivHeader>
-          <BackButton size={30} onClick={() => navigate(-1)} />
+          <BackButton size={30} onClick={() => navigate("/")} />
         </Container>
       </FullWidh>
 
@@ -215,7 +215,7 @@ export function ProductDetail() {
             <DatePicker
               locale={ptBR}
               selected={startDate}
-              minDate={new Date()}
+              minDate={startDate}
               onChange={(date) => setStartDate(date)}
               monthsShown={numberMonths}
               inline
@@ -224,7 +224,7 @@ export function ProductDetail() {
               <CalendarText>
                 Adicione as datas da sua viagem para obter os preços.
               </CalendarText>
-              <CustomButton name="Iniciar reservar"/>
+              <CustomButton name="Iniciar reservar" />
             </DivBtnCalendar>
           </DivDateCalendar>
         </DivDateArea>

@@ -5,5 +5,6 @@ export function CustomButton({ name, outline, ...rest }) {
     <LoginBtn $outline={outline} {...rest}>
       {name}
     </LoginBtn>
+
   );
 }

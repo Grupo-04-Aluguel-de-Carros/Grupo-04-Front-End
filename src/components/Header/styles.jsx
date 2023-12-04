@@ -15,7 +15,7 @@ export const FullWidh = styled.nav`
   align-items: center;
   justify-content: center;
 
-  box-shadow: 0px -5px 15px ${(props) => props.theme["primary-light"]};
+  box-shadow: 0px -5px 15px ${(props) => props.theme["gray800"]};
 `;
 
 export const Container = styled.main`
@@ -105,7 +105,6 @@ export const DropdownItem = styled(DropdownMenu.Item)`
 
 export const DropdownSeparator = styled(DropdownMenu.Separator)`
   height: 1px;
-  background-color: red;
   margin: 5px;
 `;
 

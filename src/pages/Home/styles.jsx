@@ -16,7 +16,7 @@ export const Container = styled.div`
 export const AreaDate = styled.form`
   width: 100%;
   margin: 0 auto;
-  padding: 0 100px;
+  padding: 20px;
 
   border-radius: 12px;
 
@@ -25,7 +25,7 @@ export const AreaDate = styled.form`
   display: flex;
   align-items: center;
 
-  margin-bottom: -60px;
+  margin-bottom: -80px;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -42,8 +42,6 @@ export const AreaDateLimit = styled.div`
   padding: 20px;
 
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
   gap: 8px;
 `;

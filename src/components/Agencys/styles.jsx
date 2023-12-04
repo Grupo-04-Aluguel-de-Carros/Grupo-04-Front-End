@@ -68,7 +68,7 @@ export const AgencyTitle = styled.h1`
   margin-top: 100px;
 
   @media (max-width: 768px) {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
 `;
 
@@ -80,6 +80,7 @@ font-size: 1.5rem;
 
 margin-bottom: 5px;
 margin: 0 auto;
+
 `;
 
 export const AgencyAdress = styled.span`
@@ -90,4 +91,10 @@ font-weight: 100;
 line-height: 1.2;
 
 margin-bottom: 10px;
+
+@media (max-width: 768px) {
+    font-size: .8rem;
+  }
+
+
 `;
