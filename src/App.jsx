@@ -1,5 +1,7 @@
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+
+import { AuthContextProvider } from "./contexts/AuthContext";
 
 import { ThemeProvider } from "styled-components";
 import { defaultTheme } from "./styles/themes/default";
@@ -11,8 +13,10 @@ function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
-        <GlobalStyle />
-        <RoutesApp />
+        <AuthContextProvider>
+          <GlobalStyle />
+          <RoutesApp />
+        </AuthContextProvider>
       </BrowserRouter>
 
       <ToastContainer />

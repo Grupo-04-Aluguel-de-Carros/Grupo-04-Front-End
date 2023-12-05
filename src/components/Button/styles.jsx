@@ -17,10 +17,4 @@ export const LoginBtn = styled.button`
     background: ${(props) => props.$outline ? props.theme['bg'] : props.theme['bg1']};
     color: ${(props) => props.$outline ? props.theme['gray100'] : props.theme['gray100']};
   }
-
-  @media (max-width: 768px) {
-    font-weight: 900;
-    font-size: .7rem;
-    border-radius: 4px;
-  }
 `

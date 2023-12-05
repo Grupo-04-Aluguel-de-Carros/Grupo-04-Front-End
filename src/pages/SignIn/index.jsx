@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Container,
   TitlePage,
@@ -11,12 +12,13 @@ import {
   DontHaveAccount,
 } from "./styles";
 
+import { useAuth } from "../../hooks/useAuth";
+
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { CustomButton } from "../../components/Button";
 
 const loginSchema = yup
@@ -33,9 +35,19 @@ const loginSchema = yup
   .required();
 
 export function SignIn() {
-  const navigate = useNavigate();
-
   const [showPassword, setShowPassword] = useState(false);
+
+  const { signIn } = useAuth();
+
+  const navigate = useNavigate();  
+
+  function onSubmit(data) {
+    try {
+      signIn(data.email, data.password);
+    } catch (error) {
+      toast.error("Não foi possível realizar seu login. Tente mais tarde.");
+    }
+  }
 
   const {
     register,
@@ -45,16 +57,13 @@ export function SignIn() {
     resolver: yupResolver(loginSchema),
   });
 
-  const onSubmit = (data) =>
-    toast(`Email: ${data.email}\n Senha: ${data.password}`);
-
   return (
     <Container>
       <TitlePage>Inicie sua sessão</TitlePage>
 
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Label>Email:</Label>
-        <Input {...register("email")} placeholder="****@seuemail.com.br" />
+        <Input {...register("email")} placeholder="****@seuemail.com.br"/>
         <ErrorP>{errors.email?.message}</ErrorP>
 
         <Label>Password:</Label>
@@ -85,7 +94,7 @@ export function SignIn() {
           $outline
         />
       </Form>
-              
+
       <DontHaveAccount>
         Não possuí uma conta?{" "}
         <CustomButton
