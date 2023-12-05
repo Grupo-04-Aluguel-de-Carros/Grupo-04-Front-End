@@ -224,7 +224,7 @@ export function ProductDetail() {
               <CalendarText>
                 Adicione as datas da sua viagem para obter os preços.
               </CalendarText>
-              <CustomButton name="Iniciar reservar" />
+              <CustomButton name="Iniciar reservar" onClick={() => navigate("/booking/123")} />
             </DivBtnCalendar>
           </DivDateCalendar>
         </DivDateArea>

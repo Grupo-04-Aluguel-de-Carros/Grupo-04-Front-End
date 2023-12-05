@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth.jsx";
 
 import {
@@ -31,23 +30,10 @@ import {
 import { toast } from "react-toastify";
 
 export function Header() {
-  // eslint-disable-next-line no-unused-vars
-  const [user, setUser] = useState();
-
   const navigate = useNavigate();
-  const { signOut } = useAuth();
+  const { user,  signOut } = useAuth();
 
   const location = useLocation();
-
-  useEffect(() => {
-    async function loadUserData() {
-      const userData = localStorage.getItem("@rentCarUser");
-      const userResponse = JSON.parse(userData);
-      setUser(userResponse);
-    }
-
-    loadUserData();
-  }, []);
 
   function handleSignOut() {
     signOut();
@@ -83,7 +69,7 @@ export function Header() {
                   <>
                     <DropdownItem className="DropdownMenuItem">
                       <PersonIcon />
-                      {user.name}
+                      {user.name} {user.surname}
                     </DropdownItem>
 
                     <DropdownSeparator />
@@ -124,7 +110,7 @@ export function Header() {
             <>
               <FirstLetter>{handleInitials(user).toUpperCase()}</FirstLetter>
               <WelcomeUser>
-                Olá {user.name}
+                Olá {user.name} {user.surname}
                 <LogoutUser onClick={() => handleSignOut()}>Sair</LogoutUser>
               </WelcomeUser>
             </>
