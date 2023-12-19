@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import { Gear } from "phosphor-react";
 
 import logo from "../../assets/DDRental.png";
 
@@ -60,6 +61,33 @@ export const BtnArea = styled.div`
   @media (max-width: 768px) {
     display: none;
   }
+`;
+
+export const AdmPainelArea = styled.button`
+
+  background-color: transparent;
+  color: ${(props) => props.theme["gray100"]};
+  border: none;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  
+  transition: all .5s;
+
+
+&:hover{
+  cursor: pointer;
+  color: ${(props) => props.theme["purple1"]};
+
+}
+`;
+
+
+export const GearIcon = styled(Gear).attrs({
+  size: 35,
+})`
+  color: ${(props) => props.theme["gray400"]};
 `;
 
 export const DropDownTrigger = styled(DropdownMenu.Trigger)`

@@ -40,7 +40,6 @@ import {
   ButtonReserve,
   GalleryMainImage,
 } from "./styles";
-import { useToast } from "react-toastify";
 
 export function BookReserve() {
   const { user } = useAuth();
@@ -94,6 +93,7 @@ export function BookReserve() {
 
   // eslint-disable-next-line no-unused-vars
   const [numberMonths, setNumberMonths] = useState();
+  const [numberOfDaysOk, setNumberOfDaysok] = useState();
 
   const startDayConverted = format(new Date(startDate), 'dd/MM/yyyy');
   const endDayConverted = format(new Date(endDate), 'dd/MM/yyyy');
@@ -102,10 +102,11 @@ export function BookReserve() {
   const QtdOfDays = formatDistance(new Date(startDate),
   new Date(endDate), { addSuffix: false, locale: ptBR,  });
 
-  const numberOfDays = differenceInDays(new Date(endDate),
+
+  const numberOfDays = differenceInDays(new Date(endDate) ,
   new Date(startDate), { addSuffix: false, locale: ptBR });
 
-  const calcRental = numberOfDays * 250;
+  const calcRental = numberOfDays * 1500;
 
   const navigate = useNavigate();
 

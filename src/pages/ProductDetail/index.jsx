@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { api } from "../../services/api";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -17,11 +18,6 @@ import {
   DivDescription,
   Title,
   SubTitle,
-  DivFeaturesArea,
-  DivFeaturesIcons,
-  IconArea,
-  IconTitle,
-  IconFeature,
   DivPolicyArea,
   DivPolicyContainer,
   DivPolicyUnit,
@@ -36,6 +32,31 @@ import { Gallery } from "../../components/Gallery";
 import { CustomButton } from "../../components/Button";
 
 export function ProductDetail() {
+  const [startDate, setStartDate] = useState(new Date());
+  const [numberMonths, setNumberMonths] = useState();
+  const [car, setCar] = useState();
+  
+  const [address, setAddress] = useState();
+
+  const navigate = useNavigate();
+  const { id_produto } = useParams();
+
+  async function getCar() {
+    try {
+      const response = await api.get(`/car/${id_produto}`);
+      setCar(response.data);
+
+        const responseAddress = await api.get(`/address`)
+
+        setAddress(responseAddress.data.data);
+
+    } catch (error) {
+      console.log(error);
+    }
+
+    
+  }
+
   useEffect(() => {
     const media = window.matchMedia("(min-width: 545px)");
 
@@ -54,18 +75,17 @@ export function ProductDetail() {
     };
   }, []);
 
-  const [startDate, setStartDate] = useState(new Date());
-  const [numberMonths, setNumberMonths] = useState();
-
-  const navigate = useNavigate();
+  useEffect(() => {
+    getCar();
+  }, []);
 
   return (
     <>
       <FullWidh $full01>
         <Container $cnt01>
           <DivHeader>
-            <SubTitleHeader>Gramado / RS</SubTitleHeader>
-            <TitleHeader>Porshe 911 - BiTurbo</TitleHeader>
+            <SubTitleHeader>{car && car.Store.name}</SubTitleHeader>
+            <TitleHeader>{car && car.name}</TitleHeader>
           </DivHeader>
           <BackButton size={30} onClick={() => navigate("/")} />
         </Container>
@@ -77,46 +97,22 @@ export function ProductDetail() {
 
           <DivLocation>
             <SubTitleHeader>
-              Av. das Hortênsias, 4635 - Estrada Gramado, Gramado - RS,
-              95670-000
+              {car && car.Store.name}
             </SubTitleHeader>
           </DivLocation>
         </Container>
       </FullWidh>
 
-      <Gallery />
+      <Gallery idProduto = {id_produto}/>
 
       <Container>
         <DivDescription>
           <Title $linePurple>Descrição</Title>
-          <SubTitle>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint quos
-            ipsam dolores necessitatibus deleniti nisi voluptate alias maxime
-            voluptas enim, quasi eaque, modi earum minus ab recusandae odio,
-            doloremque tempora .Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Sint quos ipsam dolores necessitatibus deleniti
-            nisi voluptate alias maxime voluptas enim, quasi eaque, modi earum
-            minus ab recusandae odio, doloremque tempora Lorem ipsum dolor sit
-            amet consectetur adipisicing elit. Sint quos ipsam dolores
-            necessitatibus deleniti nisi voluptate alias maxime voluptas enim,
-            quasi eaque, modi earum minus ab recusandae odio, doloremque tempora
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint quos
-            ipsam dolores necessitatibus deleniti nisi voluptate alias maxime
-            voluptas enim, quasi eaque, modi earum minus ab recusandae odio,
-            doloremque tempora Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Sint quos ipsam dolores necessitatibus deleniti
-            nisi voluptate alias maxime voluptas enim, quasi eaque, modi earum
-            minus ab recusandae odio, doloremque tempora .Lorem ipsum dolor sit
-            amet consectetur adipisicing elit. Sint quos ipsam dolores
-            necessitatibus deleniti nisi voluptate alias maxime voluptas enim,
-            quasi eaque, modi earum minus ab recusandae odio, doloremque tempora
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint quos
-            ipsam dolores.
-          </SubTitle>
+          <SubTitle>{car && car.description}</SubTitle>
         </DivDescription>
       </Container>
 
-      <Container>
+      {/* <Container>
         <DivFeaturesArea>
           <Title $linePurple>Características</Title>
 
@@ -166,7 +162,7 @@ export function ProductDetail() {
             </IconArea>
           </DivFeaturesIcons>
         </DivFeaturesArea>
-      </Container>
+      </Container> */}
 
       <Container>
         <DivPolicyArea>
@@ -224,7 +220,10 @@ export function ProductDetail() {
               <CalendarText>
                 Adicione as datas da sua viagem para obter os preços.
               </CalendarText>
-              <CustomButton name="Iniciar reservar" onClick={() => navigate("/booking/123")} />
+              <CustomButton
+                name="Iniciar reservar"
+                onClick={() => navigate("/booking/123")}
+              />
             </DivBtnCalendar>
           </DivDateCalendar>
         </DivDateArea>

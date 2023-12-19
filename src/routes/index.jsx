@@ -9,6 +9,8 @@ import { ProductDetail } from "../pages/ProductDetail";
 import { BookReserve } from '../pages/BookReserve';
 import { CheckReserve } from "../pages/CheckReserve";
 
+import { AdminPainel } from "../pages/AdminPainel";
+
 export function RoutesApp() {
   return (
     <Routes>
@@ -19,6 +21,8 @@ export function RoutesApp() {
         <Route path="produto/:id_produto" element={<ProductDetail />}></Route>
         <Route path="booking/:id_produto" element={<BookReserve />}></Route>
         <Route path="/checkreserve" element={<CheckReserve />}></Route>
+        
+        <Route path="/admin" element={<AdminPainel />}>  </Route>
 
       </Route>
     </Routes>

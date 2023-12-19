@@ -46,7 +46,8 @@ export const AreaReserva = styled.form`
   margin: 0 auto;
   padding: 35px 28px;
 
-  margin-top: -46px;
+  margin-top: -100px;
+  margin-bottom: 100px;
   border-radius: 8px;
 
   display: flex;
@@ -102,17 +103,25 @@ export const AreaReservaButton = styled.button`
 export const AreaCarsPromotion = styled.section`
   width: 100%;
   height: 350px;
+
+  display: flex;
 `;
 
 export const CardsCar = styled.div`
+  width: 100%;
+  
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  gap: 26px;
+
+  margin: 26px;
+
 `;
 
 export const CardCar = styled.div`
-  width: 100%;
-  display: flex;
+
 
 `;
 
@@ -120,29 +129,26 @@ export const CardCarImg = styled.img.attrs(({ src }) => ({
   src: src,
   alt: "Article Cover",
 }))`
-  width: 70%;
+  width: 450px;
   max-width: 500px;
 
   object-fit: contain;
+  
+border-radius: 8px;
 `;
 
 export const CardCarTitle = styled.h1`
-  font-size: 3rem;
+  font-size: 2rem;
   text-align: left;
 `;
 
 export const CardCarDescribeArea = styled.div`
   margin: auto 0;
-  margin-left: -85px;
-  margin-right: 50px;
-  height: 150px;
-
-  padding: 100px 85px;
 
   background-color: #191818dc;
 
   display: flex;
-  flex-direction: column;
+  flex-direction: column;;
   justify-content: center;
 `;
 
@@ -214,8 +220,15 @@ export const SubTitle = styled.p`
   font-weight: 100;
   opacity: 0.8;
 
+  width: 400px;
+
   text-transform: uppercase;
 `;
+
+export const AgencyBadge = styled.div`
+  
+`;
+
 
 export const AgencyCadTitle = styled.h3`
   font-size: 1.4rem;

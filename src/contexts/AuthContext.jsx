@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 
 import { api } from "../services/api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { HttpStatusCode } from "axios";
 
@@ -24,6 +24,7 @@ export function AuthContextProvider({ children }) {
   const [isLodingUserStorageData, setisLoadingUserStorageData] = useState(true);
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   async function userAndTokenUpdate(userData, token) {
     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -47,14 +48,27 @@ export function AuthContextProvider({ children }) {
     try {
       const { data } = await api.post("/auth/login", { email, password });
 
+      console.log(data)
+      
+      const local = location.pathname;
+
+      console.log(local);
+
+      if (local !== "/signin" && local !== "/signup") {
+        console.log("ok")
+      } else {
+        navigate("/");
+      }
+      
+      toast.success("Seja bem vindo")
+
       if (data.user && data.token) {
         await storageUserAndTokenSave(data.user, data.token);
         userAndTokenUpdate(data.user, data.token);
-        console.log(data.user)
       }
-
     } catch (error) {
       console.log(error);
+      toast.error(error.response.data.error);
     } finally {
       setisLoadingUserStorageData(false);
     }
@@ -85,11 +99,10 @@ export function AuthContextProvider({ children }) {
         email: data.email,
         password: data.password,
       });
-
+      toast.success("Cadastro realizado com sucesso");
       signIn(data.email, data.password);
     } catch (error) {
-      console.log(error);
-      toast.error(HttpStatusCode.InternalServerError);
+      toast.error(error.response.data.error);
     }
   }
 

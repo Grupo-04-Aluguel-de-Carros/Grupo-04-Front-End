@@ -14,6 +14,8 @@ import {
   DropDownContent,
   DropdownItem,
   DropdownSeparator,
+  AdmPainelArea,
+  GearIcon
 } from "./styles.jsx";
 import { CustomButton } from "../Button/index.jsx";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -107,12 +109,26 @@ export function Header() {
           </DropdownMenu.Root>
 
           {user ? (
-            <>
+            <>              
+
               <FirstLetter>{handleInitials(user).toUpperCase()}</FirstLetter>
               <WelcomeUser>
                 Olá {user.name} {user.surname}
                 <LogoutUser onClick={() => handleSignOut()}>Sair</LogoutUser>
               </WelcomeUser>
+
+              {user.role === 'ADMIN' ? (
+              <>
+              <AdmPainelArea onClick={() => navigate('/admin')}>
+              <GearIcon />
+                 Painel Administrativo
+              </AdmPainelArea>
+              
+              </>
+            ) : (
+              <></>
+            )}
+              
             </>
           ) : (
             <BtnArea>
@@ -122,11 +138,6 @@ export function Header() {
                     name="Cadastrar"
                     onClick={() => navigate("/signup")}
                   />
-
-                  <CustomButton
-                    name="Clique aqui pra acessar a rota"
-                    onClick={() => navigate("/produto/123123")}
-                  />
                 </>
               ) : location.pathname === "/signup" ? (
                 <>
@@ -135,10 +146,9 @@ export function Header() {
                     onClick={() => navigate("/signin")}
                   />
 
-                  <CustomButton
-                    name="Clique aqui pra acessar a rota"
-                    onClick={() => navigate("/produto/123123")}
-                  />
+
+
+                  
                 </>
               ) : (
                 <BtnArea>
@@ -152,10 +162,9 @@ export function Header() {
                     onClick={() => navigate("/signup")}
                   />
 
-                  <CustomButton
-                    name="Clique aqui pra acessar a rota"
-                    onClick={() => navigate("/produto/123123")}
-                  />
+                  
+
+          
                 </BtnArea>
               )}
             </BtnArea>
